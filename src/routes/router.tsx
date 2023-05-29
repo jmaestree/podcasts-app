@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Root from './root';
+import Root, { loader as loaderRoot } from './root';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    loader: loaderRoot,
     children: [
       {
         path: '',
