@@ -1,24 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './routes/root';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    children: [
-      {
-        path: '',
-        element: 'To be developed: Main page'
-      }
-    ]
-  }
-]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
