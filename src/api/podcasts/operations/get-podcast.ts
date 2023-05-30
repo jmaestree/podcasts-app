@@ -45,8 +45,8 @@ function mapper(id: string, podcasts?: GetPodcast, feeds?: GetEpisodes): Podcast
       id: item.guid._,
       date: item.pubDate,
       audio: {
-        url: item.enclosure.$.url,
-        type: item.enclosure.$.type
+        url: item?.enclosure?.$?.url,
+        type: item?.enclosure?.$?.type
       },
       description: item.description,
       duration: item['itunes:duration'],
