@@ -9,7 +9,7 @@ interface GetAllPodcasts {
 function mapper(result?: GetAllPodcasts): Podcast[] {
   return (
     result?.feed?.entry?.map((item) => ({
-      id: item?.id?.label,
+      id: item?.id?.attributes?.['im:id'],
       artist: item?.['im:artist']?.label,
       description: item?.summary.label,
       image: item?.['im:image']?.[0].label,
