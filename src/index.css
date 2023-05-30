@@ -16,4 +16,8 @@
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  a {
+    @apply text-blue-600 visited:text-blue-900;
+  }
 }
