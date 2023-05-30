@@ -13,7 +13,7 @@ function mapper(result?: GetAllPodcasts): Podcast[] {
       id: item?.id?.attributes?.['im:id'],
       artist: item?.['im:artist']?.label,
       description: item?.summary.label,
-      image: item?.['im:image']?.[0].label,
+      image: item?.['im:image']?.[2].label || item?.['im:image']?.[1].label || item?.['im:image']?.[0].label,
       title: item?.title.label
     })) ?? []
   );
