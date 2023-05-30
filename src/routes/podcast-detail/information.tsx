@@ -1,5 +1,5 @@
 import React from 'react';
-import { Await, useRouteLoaderData } from 'react-router-dom';
+import { Await, Link, useRouteLoaderData } from 'react-router-dom';
 import { Podcast } from '../../api/podcasts';
 import Card from '../../components/card';
 import { humanize } from '../../utils/dates';
@@ -36,7 +36,9 @@ const Information: React.FC = () => {
                   <tbody>
                     {item.episodes?.map((episode) => (
                       <tr key={episode.title} className="even:bg-gray-100">
-                        <td className="p-2">{episode.title}</td>
+                        <td className="p-2">
+                          <Link to={`/podcast/${item.id}/episode/${episode.id}`}>{episode.title}</Link>
+                        </td>
                         <td className="p-2">{humanize(episode.date)}</td>
                         <td className="p-2">{episode.duration}</td>
                       </tr>

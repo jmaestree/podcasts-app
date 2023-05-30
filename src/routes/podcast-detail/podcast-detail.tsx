@@ -1,5 +1,5 @@
 import React from 'react';
-import { Await, LoaderFunction, Outlet, defer, useLoaderData } from 'react-router-dom';
+import { Await, Link, LoaderFunction, Outlet, defer, useLoaderData } from 'react-router-dom';
 import Navbar from '../../components/navbar';
 import { Podcast, getPodcast } from '../../api/podcasts';
 import Card from '../../components/card';
@@ -21,15 +21,17 @@ const PodcastDetail: React.FC = () => {
           {(item: Podcast) => (
             <div className="flex px-4 flex-1 gap-x-3">
               <div className="flex w-3/12">
-                <Card className="flex-col divide-y divide-gray-300 gap-y-3 mb-auto">
-                  <img src={item.image} className="w-4/5 aspect-square rounded-md my-3 mx-auto" alt={item.title} />
-                  <div className="flex flex-col pt-3">
-                    <h1 className="font-bold font-xl">{item.title}</h1>
-                    <p className="italic">by {item.artist}</p>
-                  </div>
+                <Card className="flex-col divide-y divide-gray-300 gap-y-3 mb-auto w-full overflow-hidden">
+                  <Link to={`/podcast/${item.id}`}>
+                    <img src={item.image} className="w-4/5 aspect-square rounded-md my-3 mx-auto" alt={item.title} />
+                    <div className="flex flex-col pt-3">
+                      <h1 className="font-bold font-xl">{item.title}</h1>
+                      <p className="italic">by {item.artist}</p>
+                    </div>
+                  </Link>
                   <div className="flex flex-col pt-3">
                     <p className="font-bold">Description:</p>
-                    <p className="italic" dangerouslySetInnerHTML={{ __html: item.description }} />
+                    <p className="italic break-words" dangerouslySetInnerHTML={{ __html: item.description }} />
                   </div>
                 </Card>
               </div>
