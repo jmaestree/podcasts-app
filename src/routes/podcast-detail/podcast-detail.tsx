@@ -19,7 +19,7 @@ const PodcastDetail: React.FC = () => {
       <React.Suspense fallback={null}>
         <Await resolve={podcast} errorElement={<p>Error loading podcasts!</p>}>
           {(item: Podcast) => (
-            <div className="flex px-4 flex-1 gap-x-3">
+            <div className="flex px-4 pb-10 flex-1 gap-x-3">
               <div className="flex w-3/12">
                 <Card className="flex-col divide-y divide-gray-300 gap-y-3 mb-auto w-full overflow-hidden">
                   <Link to={`/podcast/${item.id}`}>
