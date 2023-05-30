@@ -42,7 +42,7 @@ function mapper(id: string, podcasts?: GetPodcast, feeds?: GetEpisodes): Podcast
     result.image = feeds.rss.channel['itunes:image'].$.href;
     result.title = feeds.rss.channel.title;
     result.episodes = feeds.rss.channel.item.map((item) => ({
-      id: item.guid,
+      id: item.guid._,
       date: item.pubDate,
       audio: {
         url: item.enclosure.$.url,

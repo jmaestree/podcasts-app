@@ -20,10 +20,19 @@ export interface ChannelDto {
   item: EpisodeDto[];
 }
 
+export interface GuidDto {
+  _: string;
+  $: EmptyDto;
+}
+
+export interface EmptyDto {
+  isPermaLink: string;
+}
+
 export interface EpisodeDto {
   title: string;
   description: string;
-  guid: string;
+  guid: GuidDto;
   pubDate: string;
   link: string;
   'itunes:explicit': ItunesExplicitDto;
