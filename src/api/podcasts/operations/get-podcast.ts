@@ -1,3 +1,4 @@
+import { cache } from '../../../utils/cache';
 import request from '../../fetcher';
 import { PodcastDto } from '../dto';
 import { Podcast } from '../types';
@@ -27,9 +28,11 @@ function mapper(id: string, result?: GetPodcast): Podcast {
 }
 
 export async function getPodcast(id: string, options?: RequestInit): Promise<Podcast> {
-  const result = await request<GetPodcast>(`https://itunes.apple.com/lookup?id=${id}`, {
-    ...options
-  });
+  const result = await cache<GetPodcast | undefined>(`podcast-${id}`, () =>
+    request<GetPodcast>(`https://itunes.apple.com/lookup?id=${id}`, {
+      ...options
+    })
+  );
 
   return mapper(id, result);
 }

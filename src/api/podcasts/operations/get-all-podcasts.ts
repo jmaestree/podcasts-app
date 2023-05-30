@@ -1,3 +1,4 @@
+import { cache } from '../../../utils/cache';
 import request from '../../fetcher';
 import { FeedDto } from '../dto';
 import { Podcast } from '../types';
@@ -19,11 +20,10 @@ function mapper(result?: GetAllPodcasts): Podcast[] {
 }
 
 export async function getAllPodcasts(options?: RequestInit): Promise<Podcast[]> {
-  const result = await request<GetAllPodcasts>(
-    'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json',
-    {
+  const result = await cache<GetAllPodcasts | undefined>('podcast-list', () =>
+    request<GetAllPodcasts>('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json', {
       ...options
-    }
+    })
   );
 
   return mapper(result);
