@@ -35,15 +35,15 @@ const PodcastDetail: React.FC = () => {
                 </Card>
               </div>
               <div className="flex flex-col w-9/12 gap-y-3">
-                <Card className="">
+                <Card className="py-3">
                   <p className="text-xl font-bold">Episodes: {item.episodes?.length}</p>
                 </Card>
-                <Card className="overflow-hidden">
+                <Card className="overflow-hidden py-3">
                   {item.episodes?.length === 0 ? (
                     `There's no episodes available for this podcast`
                   ) : (
                     <table className="w-full divide-y divide-gray-300">
-                      <thead>
+                      <thead className="text-left">
                         <tr>
                           <th scope="col" className="p-3">
                             Title
