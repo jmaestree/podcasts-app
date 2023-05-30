@@ -5,18 +5,13 @@ interface PodcastProps {
 }
 
 const Podcast: React.FC<PodcastProps> = ({ podcast }) => {
-  const { title, description, artist, image } = podcast || {};
+  const { title, artist, image } = podcast || {};
 
   return (
-    <div className="card">
-      <img src={image} className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text text-truncate d-inline-block" style={{ maxHeight: '3rem' }}>
-          {description}
-        </p>
-        <p className="card-text">{artist}</p>
-      </div>
+    <div className="relative flex flex-col px-6 pb-3 bg-white shadow items-center mt-10 text-center">
+      <img src={image} className="w-2/3 aspect-square rounded-full shadow-xl -mt-10" alt={title} />
+      <h5 className="uppercase break-words line-clamp-2">{title}</h5>
+      <p className="text-sm text-slate-500">Author: {artist}</p>
     </div>
   );
 };

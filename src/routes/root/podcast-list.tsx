@@ -6,11 +6,11 @@ const PodcastList: React.FC = () => {
   const data = useLoaderData() as PodcastType[];
 
   return (
-    <div className="row row-cols-4 g-4">
+    <div className="grid grid-cols-4 gap-x-4 gap-y-12">
       {data.map((item) => (
-        <div key={item.id} className="col">
+        <a key={item.id} href="#" className="flex">
           <Podcast podcast={item} />
-        </div>
+        </a>
       ))}
     </div>
   );

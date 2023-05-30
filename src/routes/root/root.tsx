@@ -6,7 +6,7 @@ const Root: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="container-fluid">
+      <div className="flex flex-col px-4">
         <Outlet />
       </div>
     </>
