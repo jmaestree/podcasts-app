@@ -15,7 +15,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-
 ### `npm run start:pro`
 
 Runs the app in the production mode (executing the app built on `/build` folder).\
@@ -40,12 +39,16 @@ The build is minified and the filenames include the hashes.\
 ```bash
 ├── [+] public/                       # Static and public files
 ├── [+] src/
-│    ├── ....                           # To be documented
-│    ├── ....                           # To be documented
-│    └── ....                           # To be documented
+│    ├── /api                           # Contain interfaces, DTO's and services used for retrieving data from API's
+│    ├── /components                    # Components of the app
+│    ├── /routes                        # Contains router configuration and routes/screens
+│    ├── /utils                         # Utilities shared accross the app
+│    ├── index.css                      # Styles of the app
+│    └── index.tsx                      # Main entry point of the app
 ├── .gitignore                        # Git ignore config
 ├── .prettierrc.js                    # Prettier config
 ├── package.json
 ├── README.md                         # Inception
+├── tailwind.config.js                # Tailwind config
 └── tsconfig.json                     # Typescript config
 ```
