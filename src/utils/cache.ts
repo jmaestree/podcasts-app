@@ -27,22 +27,23 @@ function contains(key: string) {
   return value && value.expires > new Date().getTime();
 }
 
-export function cache<Result = any>(
+export async function cache<Result = any>(
   key: string,
   callbackFn: () => Promise<Result>,
   expiration = DEFAULT_EXPIRATION
 ): Promise<Result> {
   if (contains(key)) {
-    return Promise.resolve(get(key)?.item as Result);
+    return get(key)?.item as Result;
   }
 
-  const result = callbackFn();
+  try {
+    const result: Result = await callbackFn();
 
-  result.then((result: Result) => {
     add(key, result, expiration);
 
     return result;
-  });
-
-  return result;
+  } catch (error) {
+    console.warn(`Error filling the cache key ${key}, reason:`, error);
+    return undefined as Result;
+  }
 }
