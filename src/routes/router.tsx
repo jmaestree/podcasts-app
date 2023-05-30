@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import PodcastList, { loader as loaderPodcastList } from './podcast-list/podcast-list';
 import PodcastDetail, { loader as loaderPodcastDetail } from './podcast-detail/podcast-detail';
+import Information from './podcast-detail/information';
 
 export const router = createBrowserRouter([
   {
@@ -9,8 +10,19 @@ export const router = createBrowserRouter([
     loader: loaderPodcastList
   },
   {
+    id: 'detail',
     path: '/podcast/:podcastId',
     element: <PodcastDetail />,
-    loader: loaderPodcastDetail
+    loader: loaderPodcastDetail,
+    children: [
+      {
+        path: '',
+        element: <Information />
+      },
+      {
+        path: 'episode/:episodeId',
+        element: 'Episode detail'
+      }
+    ]
   }
 ]);
