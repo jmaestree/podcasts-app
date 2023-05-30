@@ -1,19 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Root, { loader as loaderRoot } from './root/root';
-import PodcastList from './root/podcast-list';
+import PodcastList, { loader as loaderPodcastList } from './podcast-list/podcast-list';
 import PodcastDetail, { loader as loaderPodcastDetail } from './podcast-detail/podcast-detail';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
-    children: [
-      {
-        path: '',
-        element: <PodcastList />,
-        loader: loaderRoot
-      }
-    ]
+    element: <PodcastList />,
+    loader: loaderPodcastList
   },
   {
     path: '/podcast/:podcastId',
