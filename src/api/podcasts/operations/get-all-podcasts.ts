@@ -20,11 +20,14 @@ function mapper(result?: GetAllPodcasts): Podcast[] {
 }
 
 export async function getAllPodcasts(options?: RequestInit): Promise<Podcast[]> {
-  const result = await cache<GetAllPodcasts | undefined>('podcast-list', () =>
-    request<GetAllPodcasts>('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json', {
-      ...options
-    })
-  );
+  return cache('podcast-list', async () => {
+    const result = await request<GetAllPodcasts>(
+      'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json',
+      {
+        ...options
+      }
+    );
 
-  return mapper(result);
+    return mapper(result);
+  });
 }

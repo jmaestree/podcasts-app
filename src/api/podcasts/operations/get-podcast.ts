@@ -58,27 +58,25 @@ function mapper(id: string, podcasts?: GetPodcast, feeds?: GetEpisodes): Podcast
 }
 
 export async function getPodcast(id: string, options?: RequestInit): Promise<Podcast> {
-  const podcastsResult = await cache<GetPodcast | undefined>(`podcast-${id}`, () =>
-    request<GetPodcast>(`https://itunes.apple.com/lookup?id=${id}`, {
+  return await cache(`podcast-${id}`, async () => {
+    const podcastsResult = await request<GetPodcast>(`https://itunes.apple.com/lookup?id=${id}`, {
       ...options
-    })
-  );
+    });
 
-  const feedUrl = getFeedUrl(id, podcastsResult);
-  let podcastEpisodes;
+    const feedUrl = getFeedUrl(id, podcastsResult);
+    let podcastEpisodes;
 
-  if (feedUrl) {
-    podcastEpisodes = await cache<GetEpisodes | undefined>(`podcast-episodes-${id}`, () =>
-      request<GetEpisodes>(feedUrl, {
+    if (feedUrl) {
+      podcastEpisodes = await request<GetEpisodes>(feedUrl, {
         ...options,
         headers: {
-          'Content-Type': 'application/xml'
+          'Content-Type': 'application/rss+xml'
         }
-      })
-    );
-  } else {
-    console.warn('No episodes found for podcast', id);
-  }
+      });
+    } else {
+      console.warn('No episodes found for podcast', id);
+    }
 
-  return mapper(id, podcastsResult, podcastEpisodes);
+    return mapper(id, podcastsResult, podcastEpisodes);
+  });
 }
