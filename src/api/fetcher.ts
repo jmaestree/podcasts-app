@@ -1,3 +1,5 @@
+import xml2js from 'xml2js';
+
 const BASE_URL = 'https://api.allorigins.win/get';
 
 function buildUrl(resource: string) {
@@ -22,7 +24,15 @@ async function request<Result, BodyParams = undefined>(
     throw new Error('Network response was not ok.');
   }
 
-  return JSON.parse((await response.json()).contents);
+  const result = (await response.json()).contents;
+
+  if ((((init?.headers as any)?.['Content-Type'] as string) || '').includes('xml')) {
+    const parser = new xml2js.Parser({ explicitArray: false });
+
+    return await parser.parseStringPromise(result);
+  } else {
+    return JSON.parse(result);
+  }
 }
 
 export default request;

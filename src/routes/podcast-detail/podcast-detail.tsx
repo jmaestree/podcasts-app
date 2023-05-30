@@ -20,7 +20,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return undefined;
   }
 
-  return getPodcast(podcastId, { method: 'GET', signal: request.signal });
+  return await getPodcast(podcastId, { method: 'GET', signal: request.signal });
 };
 
 export default PodcastDetail;
