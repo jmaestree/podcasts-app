@@ -6,19 +6,20 @@ import Card from '../../components/card';
 const Episode: React.FC = () => {
   const { episodeId } = useParams();
   const { podcast } = useRouteLoaderData('detail') as { podcast: Podcast };
+  const episodeIdRaw = decodeURIComponent(episodeId || '');
 
   return (
     <React.Suspense fallback={null}>
       <Await resolve={podcast} errorElement={<p>Error loading podcasts!</p>}>
         {(item: Podcast) => {
-          const episode = item?.episodes?.find((item) => item.id === episodeId);
+          const episode = item?.episodes?.find((item) => item.id === episodeIdRaw);
           const { title, description, audio } = episode ?? item.episodes?.[0] ?? {};
 
           return (
             <>
               {!episode && (
                 <p className="text-orange-600">
-                  Unable to find the episode with ID: {episodeId}, showing the first one of the podcast
+                  Unable to find the episode with ID: {episodeIdRaw}, showing the first one of the podcast
                 </p>
               )}
               <Card className="py-3 flex-col gap-y-4">

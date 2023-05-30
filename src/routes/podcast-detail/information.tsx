@@ -37,7 +37,9 @@ const Information: React.FC = () => {
                     {item.episodes?.map((episode) => (
                       <tr key={episode.title} className="even:bg-gray-100">
                         <td className="p-2">
-                          <Link to={`/podcast/${item.id}/episode/${episode.id}`}>{episode.title}</Link>
+                          <Link to={`/podcast/${item.id}/episode/${encodeURIComponent(episode.id)}`}>
+                            {episode.title}
+                          </Link>
                         </td>
                         <td className="p-2">{humanize(episode.date)}</td>
                         <td className="p-2">{episode.duration}</td>
