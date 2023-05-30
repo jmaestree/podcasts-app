@@ -1,9 +1,9 @@
 import xml2js from 'xml2js';
 
-const BASE_URL = 'https://api.allorigins.win/get';
+const BASE_URL = 'https://cors-anywhere.herokuapp.com';
 
 function buildUrl(resource: string) {
-  return `${BASE_URL}?url=${encodeURIComponent(resource)}`;
+  return `${BASE_URL}/${resource}`;
 }
 
 async function request<Result, BodyParams = undefined>(
@@ -24,14 +24,14 @@ async function request<Result, BodyParams = undefined>(
     throw new Error('Network response was not ok.');
   }
 
-  const result = (await response.json()).contents;
-
   if ((((init?.headers as any)?.['Content-Type'] as string) || '').includes('xml')) {
+    const result = await response.text();
     const parser = new xml2js.Parser({ explicitArray: false });
 
     return await parser.parseStringPromise(result);
   } else {
-    return JSON.parse(result);
+    const result = await response.json();
+    return result;
   }
 }
 
