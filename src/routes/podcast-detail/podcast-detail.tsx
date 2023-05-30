@@ -21,7 +21,7 @@ const PodcastDetail: React.FC = () => {
           {(item: Podcast) => (
             <div className="flex px-4 flex-1 gap-x-3">
               <div className="flex w-3/12">
-                <Card className="flex-col divide-y divide-slate-300 gap-y-3 mb-auto">
+                <Card className="flex-col divide-y divide-gray-300 gap-y-3 mb-auto">
                   <img src={item.image} className="w-4/5 aspect-square rounded-md my-3 mx-auto" alt={item.title} />
                   <div className="flex flex-col pt-3">
                     <h1 className="font-bold font-xl">{item.title}</h1>
